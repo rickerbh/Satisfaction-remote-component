@@ -1,0 +1,550 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<style>
+			/*
+			Copyright (c) 2008, Yahoo! Inc. All rights reserved.
+			Code licensed under the BSD License:
+			http://developer.yahoo.net/yui/license.txt
+			version: 2.6.0
+			*/
+			html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}del,ins{text-decoration:none;}
+
+			body {
+				background: #e8f4f8;
+				font-family: Helvetica;
+				font-size: 10px;
+				min-height: 36.7em;
+			}
+			.topic {
+				padding: 1em;
+				padding-top: 2em;
+				padding-bottom: 1.5em;
+				background: url('::imagePath::DC_topic-top-gradient.png') left top repeat-x;
+				position: relative;
+				min-height: 18em;
+			}
+			.topic .icon {
+				float: right;
+				margin-top: 0em;
+				margin-right: .2em;
+				margin-left: .5em;
+				margin-bottom: .3em;
+				width: 3.4em;
+				height: 3.1em;
+				background: url('') left top no-repeat;
+			}
+			.topic h1 {
+				font-weight: bold;
+				font-size: 1.8em;
+				text-shadow: 0px 1px 0px #FFFFFF;
+				color: #1f1f1f;
+			}
+			.date {
+				margin-top: .3em;
+				font-size: 1.1em;
+				text-shadow: 0px 1px 0px #FFFFFF;
+				color: #4b4b4b;
+			}
+			.post {
+				margin-top: 1.2em;
+				margin-left: 7em;
+				margin-bottom: 3em;
+				position: relative;
+			}
+			.post .gutter {
+				position: absolute;
+				left: -7em;
+				top: .9em;
+				width: 5.9em;
+			}
+			.post .gutter .avatar {
+				width: 5.5em;
+				height: 5.5em;
+				padding: .1em;
+				border: .1em solid #b1cbd1;
+				background: #FFFFFF;
+			}
+			.post .gutter .username {
+				text-decoration: none;
+				color: #555555;
+				font-size: 1.3em;
+				display: block;
+				margin-top: .3em;
+				text-shadow: 0px 1px 0px #FFFFFF;
+			}
+			.post .gutter .date {
+				width: 110%;
+			}
+			.post .bubble {
+				background: #FFFFFF;
+				padding: 1.1em;
+				padding-top: .8em;
+				padding-bottom: .8em;
+				border: .1em solid #b1cbd1;
+				-webkit-border-radius: 10px;
+				position: relative;
+				min-height: 6em;
+			}
+			.post .bubble .text {
+				font-size: 1.3em;
+				line-height: 1.4em;
+				overflow: hidden;
+			}
+			.post .bubble .text img {
+				max-width: 100%;
+			}
+			.post .bubble .arrow {
+				background: url('::imagePath::DC_bubble-arrow-blue.png') left top no-repeat;
+				position: absolute;
+				left: -.7em;
+				top: 3.2em;
+				width: .7em;
+				height: 1.3em;
+			}
+			.post .footer {
+				margin-top: 1.2em;
+				position: relative;
+			}
+			.post .footer .text {
+				color: #4b4b4b;
+				text-shadow: 0px 1px 0px #FFFFFF;
+				font-size: 1.2em;
+				padding-left: 1em;
+				width: 60%;
+			}
+			.post .footer .commentsCount {
+				color: #4b4b4b;
+				text-shadow: 0px 1px 0px #FFFFFF;
+				font-size: 1.2em;
+				font-weight: bold;
+				padding-left: 1em;
+			}
+			.button {
+				padding: 5px;
+				background: url('::imagePath::DC_topic-button-middle.png') left bottom repeat-x;
+				background-color: #e0eef4;
+				text-decoration: none;
+				padding-left: 12px;
+				padding-right: 12px;
+				-webkit-border-radius: 6px;
+				border: 1px solid #9eb8c4;
+				text-shadow: 0px 1px 0px #FFFFFF;
+				color: #64818e;
+				font-size: 1.2em;
+				font-weight: bold;
+				margin-top: -.5em;
+			}
+			.post .footer .metoo {
+				position: absolute;
+				right: 0em;
+			}
+			.topic .bottom {
+				width: 100%;
+				height: 2.9em;
+				position: absolute;
+				bottom: 0em;
+				left: 0em;
+				background: url('::imagePath::DC_topic-bottom-gradient.png') left top repeat-x;
+			}
+			.replies {
+				padding: 1em;
+				padding-top: 0em;
+				padding-bottom: .5em;
+			}
+			.replies .loading {
+				font-size: 1.7em;
+				color: #595858;
+				text-align: center;
+				margin-top: 1em;
+				margin-bottom: 2em;
+			}
+			.replies .comments {
+				margin-top: 2.6em;
+			}
+			.replies .comments .comment {
+				margin-top: 1.6em;
+				padding-left: 1em;
+				padding-right: 1em;
+			}
+			.replies .comments .comment .username {
+				font-size: 1.2em;
+				color: #555555;
+				font-weight: bold;
+				text-shadow: 0px 1px 0px #FFFFFF;
+			}
+			.replies .comments .comment .text {
+				font-size: 1.3em;
+				margin-top: .3em;
+				line-height: 1.4em;
+				color: #555555;
+				text-shadow: 0px 1px 0px #FFFFFF;
+			}
+			.loadMore {
+				height: 2em;
+				padding: 3em;
+				padding-left: 8.8em;
+			}
+
+			/* idea - yellow */
+			.topic.idea {
+				background-color: #fdf1ce;
+			}
+			.topic.idea .icon {
+				background: url('::imagePath::DC_topic-icon-idea.png');
+			}
+			.topic.idea .post .bubble {
+				border-color: #d0c7ad;
+			}
+			.topic.idea .post .gutter .avatar {
+				border-color: #d0c7ad;
+			}
+			.topic.idea .post .bubble .arrow {
+				background-image: url('::imagePath::DC_bubble-arrow-yellow.png');
+			}
+			.topic.idea .button {
+				background-color: #f1e4bd;
+				border-color: #b9a876;
+				color: #8d7c4a;
+			}
+
+			/* talk - green */
+			.topic.talk {
+				background-color: #dfefce;
+			}
+			.topic.talk .icon {
+				background: url('::imagePath::DC_topic-icon-talk.png');
+			}
+			.topic.talk .post .bubble {
+				border-color: #aebf9d;
+			}
+			.topic.talk .post .gutter .avatar {
+				border-color: #aebf9d;
+			}
+			.topic.talk .post .bubble .arrow {
+				background-image: url('::imagePath::DC_bubble-arrow-green.png');
+			}
+			.topic.talk .button {
+				background-color: #c9deb3;
+				border-color: #81986a;
+				color: #506739;
+			}
+			.topic.talk .footer {
+				display: none;
+			}
+
+			/* praise - green */
+			.topic.praise {
+				background-color: #dfefce;
+			}
+			.topic.praise .icon {
+				background: url('::imagePath::DC_topic-icon-praise.png');
+			}
+			.topic.praise .post .bubble {
+				border-color: #aebf9d;
+			}
+			.topic.praise .post .gutter .avatar {
+				border-color: #aebf9d;
+			}
+			.topic.praise .post .bubble .arrow {
+				background-image: url('::imagePath::DC_bubble-arrow-green.png');
+			}
+			.topic.praise .button {
+				background-color: #c9deb3;
+				border-color: #81986a;
+				color: #506739;
+			}
+			.topic.praise .footer {
+				display: none;
+			}
+
+			/* problem - red */
+			.topic.problem {
+				background-color: #f5dede;
+			}
+			.topic.problem .icon {
+				background: url('::imagePath::DC_topic-icon-problem.png');
+			}
+			.topic.problem .post .bubble {
+				border-color: #e4b6b6;
+			}
+			.topic.problem .post .gutter .avatar {
+				border-color: #e4b6b6;
+			}
+			.topic.problem .post .bubble .arrow {
+				background-image: url('::imagePath::DC_bubble-arrow-red.png');
+			}
+			.topic.problem .button {
+				background-color: #f6d3d3;
+				border-color: #cb8d8d;
+				color: #9b5151;
+			}
+
+			/* question - blue */
+			.topic.question {
+				background-color: #e2f4f8;
+			}
+			.topic.question .icon {
+				background: url('::imagePath::DC_topic-icon-question.png');
+			}
+			.topic.question .post .bubble {
+				border-color: #b1cbd1;
+			}
+			.topic.question .post .gutter .avatar {
+				border-color: #b1cbd1;
+			}
+			.topic.question .post .bubble .arrow {
+				background-image: url('::imagePath::DC_bubble-arrow-blue.png');
+			}
+
+			/* update - gray */
+			.topic.update {
+				background-color: #e2e2e2;
+			}
+			.topic.update .icon {
+				background: url('::imagePath::DC_topic-icon-update.png');
+			}
+			.topic.update .post .bubble {
+				border-color: #b1b1b1;
+			}
+			.topic.update .post .gutter .avatar {
+				border-color: #b1b1b1;
+			}
+			.topic.update .post .bubble .arrow {
+				background-image: url('::imagePath::DC_bubble-arrow-gray.png');
+			}
+			.topic.update .footer {
+				display: none;
+			}
+
+		</style>
+		<script type="text/JavaScript">
+
+			var req;
+			var lastPage = 0;
+
+			function loadReplies() {
+				lastPage++;
+				var url = "http://api.getsatisfaction.com/topics/::topicId::?page="+ lastPage +"&randomNumberToAvoidCache="+ Math.floor(Math.random()*100000000);
+				req = new XMLHttpRequest();
+				if(req) {
+					req.onreadystatechange = processReplies;
+					req.open("GET", url, true);
+					req.setRequestHeader("Accept", "text/html");
+					req.overrideMimeType("text/xml");
+					req.send("");
+					document.getElementById("loadMoreButton").innerHTML = "Loading...";
+				}
+			}
+
+			function processReplies() {
+				if (req.readyState == 4) { // loaded
+					var replies = document.getElementById("replies");
+					document.getElementById("loadingDiv").style.display = "none";
+					if (req.status == 200) { // ok
+					    var entries = req.responseXML.getElementsByTagName("entry");
+					    for (var i = 0; i < entries.length; i++) {
+							var avatarURL = getElementTextNS("sfn", "avatar", entries[i], 0);
+							if (i == 0) {
+								if (avatarURL == "http://getsatisfaction.com") {
+									document.getElementById("avatar").src = "http://1.static.getsatisfaction.com/images/user_default_medium.png";
+								} else {
+									document.getElementById("avatar").src = avatarURL;
+								}
+							} else {
+								var isComment = false;
+								var inReplyToCommentsReplyId = getElementTextNS("thr", "in-reply-to", entries[i], 0);
+								inReplyToCommentsReplyId = inReplyToCommentsReplyId.replace("http://api.getsatisfaction.com/topics/::topicId::/replies/", "");
+								if (parseInt(inReplyToCommentsReplyId)) {
+									var comments = document.getElementById("commentsReply"+ inReplyToCommentsReplyId);
+									if (comments) {
+										isComment = true;
+									}
+								}
+								if (isComment == true) {
+									var commentTemplate = document.getElementById("comment-template").innerHTML;
+									commentTemplate = commentTemplate.replace("::c_username::", getElementTextNS("", "name", entries[i], 0));
+									commentTemplate = commentTemplate.replace("::c_date::", humane_date(getElementTextNS("", "updated", entries[i], 0)));
+									commentTemplate = commentTemplate.replace("::c_content::", getElementTextNS("", "content", entries[i], 0));
+									document.getElementById("commentsReply"+ inReplyToCommentsReplyId).innerHTML += commentTemplate;
+									var commentsForCount = document.getElementById("commentsReply"+ inReplyToCommentsReplyId).getElementsByClassName("comment");
+									var str = "";
+									if  (commentsForCount.length == 1) {
+										str = commentsForCount.length +" Comment";
+									} else {
+										str = commentsForCount.length +" Comments";
+									}
+									document.getElementById("count_commentsReply"+ inReplyToCommentsReplyId).innerHTML = str;
+								} else {
+									var template = document.getElementById("reply-template").innerHTML;
+									template = template.replace("::r_avatar::", avatarURL);
+									template = template.replace("::r_username::", getElementTextNS("", "name", entries[i], 0));
+									template = template.replace("::r_date::", humane_date(getElementTextNS("", "updated", entries[i], 0)));
+									template = template.replace("::r_content::", getElementTextNS("", "content", entries[i], 0));
+
+									// get this reply's id
+									var commentsReplyId = getElementTextNS("", "id", entries[i], 0);
+									commentsReplyId = commentsReplyId.replace("http://api.getsatisfaction.com/topics/::topicId::/replies/", "");
+
+									// replace it for the "Add Comment" link
+									template = template.replace("::r_replyId::", commentsReplyId);
+
+									// now set the id for the comments bucket, so we can insert comments
+									commentsReplyId = "commentsReply"+ commentsReplyId;
+									template = template.replace(/::r_commentsReplyId::/g, commentsReplyId);
+
+									replies.innerHTML += template;
+								}
+							}
+					    }
+
+						// check if there's a next page
+						if (req.responseText.indexOf("<link rel=\"next\"") > 0) {
+							// yes, next page exists!
+							document.getElementById("loadMore").style.display = "block";
+							document.getElementById("loadMoreButton").innerHTML = "Load More Replies...";
+						} else {
+							// no, this is the last page
+							document.getElementById("loadMore").style.display = "none";
+						}
+
+					} else {
+						alert("There was a problem retrieving the replies:\n"+ req.status +" - "+ req.statusText);
+					}
+				}
+			}
+
+			// retrieve text of an XML document element, including
+			// elements using namespaces
+			function getElementTextNS(prefix, local, parentElem, index) {
+			    var result = "";
+		        result = parentElem.getElementsByTagName(local)[index];
+			    if (result) {
+			        // get text, accounting for possible
+			        // whitespace (carriage return) text nodes 
+			        if (result.childNodes.length > 1) {
+			            return result.childNodes[1].nodeValue;
+			        } else {
+			            return result.firstChild.nodeValue;    		
+			        }
+			    } else {
+			        return "";
+			    }
+			}
+
+			/*
+			 * Javascript Humane Dates
+			 * Copyright (c) 2008 Dean Landolt (deanlandolt.com)
+			 * Re-write by Zach Leatherman (zachleat.com)
+			 * 
+			 * Adopted from the John Resig's pretty.js
+			 * at http://ejohn.org/blog/javascript-pretty-date
+			 * and henrah's proposed modification 
+			 * at http://ejohn.org/blog/javascript-pretty-date/#comment-297458
+			 * 
+			 * Licensed under the MIT license.
+			 */
+
+			function humane_date(date_str){
+			        var time_formats = [
+			                [60, 'just now'],
+			                [90, '1 minute'], // 60*1.5
+			                [3600, 'minutes', 60], // 60*60, 60
+			                [5400, '1 hour'], // 60*60*1.5
+			                [86400, 'hours', 3600], // 60*60*24, 60*60
+			                [129600, '1 day'], // 60*60*24*1.5
+			                [604800, 'days', 86400], // 60*60*24*7, 60*60*24
+			                [907200, '1 week'], // 60*60*24*7*1.5
+			                [2628000, 'weeks', 604800], // 60*60*24*(365/12), 60*60*24*7
+			                [3942000, '1 month'], // 60*60*24*(365/12)*1.5
+			                [31536000, 'months', 2628000], // 60*60*24*365, 60*60*24*(365/12)
+			                [47304000, '1 year'], // 60*60*24*365*1.5
+			                [3153600000, 'years', 31536000], // 60*60*24*365*100, 60*60*24*365
+			                [4730400000, '1 century'] // 60*60*24*365*100*1.5
+			        ];
+
+			        var time = ('' + date_str).replace(/-/g,"/").replace(/[TZ]/g," "),
+			                dt = new Date,
+			                seconds = ((dt - new Date(time) + (dt.getTimezoneOffset() * 60000)) / 1000),
+			                token = ' ago',
+			                i = 0,
+			                format;
+
+			        if (seconds < 0) {
+			                seconds = Math.abs(seconds);
+			                token = '';
+			        }
+
+			        while (format = time_formats[i++]) {
+			                if (seconds < format[0]) {
+			                        if (format.length == 2) {
+			                                return format[1] + (i > 1 ? token : ''); // Conditional so we don't return Just Now Ago
+			                        } else {
+			                                return Math.round(seconds / format[2]) + ' ' + format[1] + (i > 1 ? token : '');
+			                        }
+			                }
+			        }
+
+			        // overflow for centuries
+			        if(seconds > 4730400000)
+			                return Math.round(seconds / 4730400000) + ' centuries' + token;
+
+			        return date_str;
+			};
+		</script>
+		<meta name="viewport" content="width=320, initial-scale=1.0" />
+	</head>
+	<body onLoad="loadReplies();">
+
+		<div class="topic ::style::">
+			<div class="icon"></div>
+			<h1>::subject::</h1>
+			<div class="post">
+				<div class="gutter">
+					<img src="" class="avatar" id="avatar" />
+					<div class="username">::username::</div>
+					<div class="date">::dateCreated::</div>
+				</div>
+				<div class="bubble"><div class="arrow"></div><div class="text">::content::</div></div>
+				<div class="footer">
+					<a href="meToo://yes" class="button metoo" id="meTooButton">Me Too!</a>
+					<div class="text">::meTooCount::</div>
+				</div>
+			</div>
+			<div class="bottom"></div>
+		</div>
+
+		<div class="replies" id="replies">
+			<div class="loading" id="loadingDiv">Loading...</div>
+		</div>
+
+		<div class="loadMore" id="loadMore" class="status" style="display: none;">
+			<a href="javascript:loadReplies();" class="button" id="loadMoreButton">Load More Replies...</a>
+		</div>
+
+		<div id="reply-template" style="display: none;">
+			<div class="post">
+				<div class="gutter">
+					<img src="::r_avatar::" class="avatar" />
+					<div class="username">::r_username::</div>
+					<div class="date">::r_date::</div>
+				</div>
+				<div class="bubble"><div class="arrow"></div><div class="text">::r_content::</div></div>
+				<div class="footer">
+					<a href="commentOn://::r_replyId::" class="button" style="float: right;">Add Comment</a>
+					<div class="commentsCount" id="count_::r_commentsReplyId::">0 Comments</div>
+				</div>
+				<div class="comments" style="" id="::r_commentsReplyId::"></div>
+			</div>
+		</div>
+
+		<div id="comment-template" style="display: none;">
+			<div class="comment">
+				<div class="username">::c_username::, ::c_date::</div>
+				<div class="text">::c_content::</div>
+			</div>
+		</div>
+
+	</body>
+</html>
